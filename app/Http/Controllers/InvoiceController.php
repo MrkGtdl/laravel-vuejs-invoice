@@ -76,6 +76,7 @@ class InvoiceController extends Controller
         $invoiceData['number'] = $request->input("number");
         $invoiceData['date'] = $request->input("date");
         $invoiceData['due_date'] = $request->input("due_date");
+        $invoiceData['discount'] = $request->input("discount");
         $invoiceData['reference'] = $request->input("reference");
         $invoiceData['terms_and_conditions'] = $request->input("terms_and_conditions");
 
@@ -89,5 +90,13 @@ class InvoiceController extends Controller
 
             InvoiceItem::create($itemdata);
         }
+    }
+
+    public function show_invoice($id) {
+        $invoice = Invoice::with(['customer','invoice_items.product'])->find($id);
+
+        return response()->json([
+            'invoice' => $invoice
+        ],200);
     }
 }

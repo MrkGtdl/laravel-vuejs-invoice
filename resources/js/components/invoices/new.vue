@@ -1,6 +1,6 @@
 <script setup>
     import { onMounted, ref } from 'vue';
-import router from '../router';
+    import router from '../router';
 
     let form =ref([])
     let alLCustomers = ref([])
@@ -97,7 +97,7 @@ import router from '../router';
             listCart.value = []
             router.push('/')
 
-            console.log('sub_total', subtotal)
+            // console.log('sub_total', subtotal)
         }
     }
 

@@ -15,20 +15,24 @@ onMounted(async () => {
 
 const getInvoices = async() => {
     let response = await axios.get("/api/get_all_invoice")
-    console.log('response1',response);
+    // console.log('response1',response);
     invoices.value = response.data.invoices
 }
 
 const search = async () => {
     let response = await axios.get("/api/search_invoice?s="+searchInvoice.value)
-    console.log('response2', response.data.invoices);
+    // console.log('response2', response.data.invoices);
     invoices.value = response.data.invoices
 }
 
 const newInvoice = async () => {
     let form = await axios.get("/api/create_invoice")//laravel route
-    console.log('form',form.data)
+    // console.log('form',form.data)
     router.push('/invoice/new')
+}
+
+const onShow = (id) => {
+    router.push('/invoice/show/'+id)
 }
 
 </script>
@@ -93,7 +97,7 @@ const newInvoice = async () => {
             <!-- item 1 -->
             <div v-if="invoices.length > 0" >
                 <div class="table--items" v-for="item in invoices" :key="item.id" >
-                    <a href="#" class="table--items--transactionId">{{ item.id }}</a>
+                    <a href="#" @click="onShow(item.id)">{{ item.id }}</a>
                     <p>{{ item.date }}</p>
                     <p>#{{ item.number }}</p>
                     <p v-if="item.customer">
