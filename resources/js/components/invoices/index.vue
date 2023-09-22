@@ -80,7 +80,12 @@ const getInvoices = async() => {
                     <a href="#" class="table--items--transactionId">{{ item.id }}</a>
                     <p>{{ item.date }}</p>
                     <p>#{{ item.number }}</p>
-                    <p>{{ item.customer_id }}</p>
+                    <p v-if="item.customer">
+                        {{ item.customer.firstname }}
+                    </p>
+                    <p v-else>
+
+                    </p>
                     <p>{{ item.due_date }}</p>
                     <p> P {{ item.total }}</p>
                 </div>
