@@ -3,6 +3,7 @@ import { onMounted, ref } from "vue";
 
 
 let invoices = ref([])
+let searchInvoice = ref([])
 
 onMounted(async () => {
     getInvoices()
@@ -11,7 +12,13 @@ onMounted(async () => {
 
 const getInvoices = async() => {
     let response = await axios.get("/api/get_all_invoice")
-    console.log('response',response);
+    console.log('response1',response);
+    invoices.value = response.data.invoices
+}
+
+const search = async () => {
+    let response = await axios.get("/api/search_invoice?s="+searchInvoice.value)
+    console.log('response2', response.data.invoices);
     invoices.value = response.data.invoices
 }
 
@@ -61,7 +68,7 @@ const getInvoices = async() => {
                 </div>
                 <div class="relative">
                     <i class="table--search--input--icon fas fa-search "></i>
-                    <input class="table--search--input" type="text" placeholder="Search invoice">
+                    <input class="table--search--input" type="text" placeholder="Search invoice" v-model="searchInvoice" @keyup="search()">
                 </div>
             </div>
 
@@ -75,8 +82,8 @@ const getInvoices = async() => {
             </div>
 
             <!-- item 1 -->
-            <div v-for="item in invoices" :key="item.id">
-                <div class="table--items" v-if="invoices.length > 0" >
+            <div v-if="invoices.length > 0" >
+                <div class="table--items" v-for="item in invoices" :key="item.id" >
                     <a href="#" class="table--items--transactionId">{{ item.id }}</a>
                     <p>{{ item.date }}</p>
                     <p>#{{ item.number }}</p>
@@ -89,9 +96,9 @@ const getInvoices = async() => {
                     <p>{{ item.due_date }}</p>
                     <p> P {{ item.total }}</p>
                 </div>
-                <div class="table--items" v-else>
-                <p>Invoice not found</p>
             </div>
+            <div class="table--items" v-else>
+                <p>Invoice not found</p>
             </div>
                 
 
