@@ -110,7 +110,7 @@
         
         <div class="card__header">
             <div>
-                <h2 class="invoice__title">New Invoice</h2>
+               <a href="/"><h2 class="invoice__title">Invoice</h2></a> 
             </div>
             <div>
                 

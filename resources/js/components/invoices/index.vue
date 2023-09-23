@@ -43,7 +43,7 @@ const onShow = (id) => {
         
         <div class="card__header">
             <div>
-                <h2 class="invoice__title">Invoices</h2>
+                <a href="/"><h2 class="invoice__title">Invoice</h2></a> 
             </div>
             <div>
                 <a class="btn btn-secondary" @click="newInvoice">
