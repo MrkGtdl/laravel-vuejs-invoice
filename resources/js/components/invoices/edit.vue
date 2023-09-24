@@ -127,16 +127,19 @@
     <div class="container">
         <div class="invoices">
         
-        <div class="card__header">
+        <!-- <div class="card__header">
             <div>
                 <a href="/"><h2 class="invoice__title">Invoice</h2></a> 
             </div>
             <div>
                 
             </div>
-        </div>
+        </div> -->
 
         <div class="card__content">
+            <div class="editLogo">
+                <a href="/"><h2 class="invoice__title">Invoice</h2></a> 
+            </div>
             <div class="card__content--header">
                 <div>
                     <p class="my-1">Customer</p>
@@ -144,6 +147,10 @@
                         <option disabled>Select Customer</option>
                         <option :value="customer.id" v-for="customer in alLCustomers" :key="customer.id">{{ customer.firstname }}</option>
                     </select>
+                    <p class="my-1">Invoice No.</p> 
+                    <input type="text" class="input" v-model="form.number" disabled>  
+                    <p class="my-1">Reference(Optional)</p> 
+                    <input type="text" class="input" v-model="form.reference" disabled>
                 </div>
                 <div>
                     <p class="my-1">Date</p> 
@@ -151,18 +158,12 @@
                     <p class="my-1">Due Date</p> 
                     <input id="due_date" type="date" class="input" v-model="form.due_date">
                 </div>
-                <div>
-                    <p class="my-1">Numero</p> 
-                    <input type="text" class="input" v-model="form.number"> 
-                    <p class="my-1">Reference(Optional)</p> 
-                    <input type="text" class="input" v-model="form.reference">
-                </div>
             </div>
-            <br><br>
+
             <div class="table">
 
                 <div class="table--heading2">
-                    <p>Item Description</p>
+                    <p><button class="btn btn-sm btn__open--modal"  @click="openModal()"><font-awesome-icon :icon="['fas', 'plus']" /></button>Item Description</p>
                     <p>Unit Price</p>
                     <p>Qty</p>
                     <p>Total</p>
@@ -188,15 +189,15 @@
                         &times;
                     </p>
                 </div>
-                <div style="padding: 10px 30px !important;">
+                <!-- <div style="padding: 10px 30px !important;">
                     <button class="btn btn-sm btn__open--modal"  @click="openModal()">Add New Line</button>
-                </div>
+                </div> -->
             </div>
 
             <div class="table__footer">
                 <div class="document-footer" >
-                    <p>Terms and Conditions</p>
-                    <textarea cols="50" rows="7" class="textarea" v-model="form.terms_and_conditions"></textarea>
+                    <!-- <p>Terms and Conditions</p>
+                    <textarea cols="50" rows="7" class="textarea" v-model="form.terms_and_conditions"></textarea> -->
                 </div>
                 <div>
                     <div class="table__footer--subtotal">
@@ -212,6 +213,15 @@
                         <span>$ {{Total()}}</span>
                     </div>
                 </div>
+            </div>
+
+            <div class="saveBtn">
+                <a class="btn btn-secondary" @click="onSave()" id="save">
+                    Save
+                </a>
+                <a class="btn btn-secondary"  id="cancel" href="/">
+                    Cancel
+                </a>
             </div>
 
            
